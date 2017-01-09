@@ -32,12 +32,12 @@ module load parallel
 
 #   List of samples to be processed
 #   Need to hard code the file path for qsub jobs
-SAMPLE_INFO=${HOME}/Projects/Inversion_loci/Liana_Samples/Liana_Samples/Liana_Samples_read_mapping/Liana_samples_BAM/finished/Liana_samples_finishedBAM.txt 
+SAMPLE_INFO=${HOME}/Projects/WBDC/WBDC_Liana_Pop_BAM.txt
 
 
 #   Full path to out directory
 #       Requires quotes around directory path
-OUT="${HOME}/Projects/Inversion_loci/Liana_Samples/Liana_Samples/Liana_Samples_read_mapping/Liana_samples_BAM/finished"
+OUT="${HOME}/Projects/WBDC/WBDC_lianapop_BAM"
 
 #   Load FastQC Module
 module load fastqc

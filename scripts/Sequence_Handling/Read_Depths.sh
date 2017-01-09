@@ -2,7 +2,7 @@
 
 #PBS -l mem=4000mb,nodes=1:ppn=4,walltime=6:00:00
 #PBS -m abe
-#PBS -M user@example.com
+#PBS -M liux1299@umn.edu
 #PBS -q lab
 
 set -e
@@ -34,16 +34,16 @@ module load parallel
 #   This script outputs a text file with all of the read depths for each sample within it.
 
 #   List of samples to be processed
-SAMPLE_INFO=
+SAMPLE_INFO=${HOME}/Projects/WBDC/WBDC_Liana_Pop_BAM/test_zipfiles.txt
 
 #   Full path to out directory
-OUT=
+OUT=${HOME}/Projects/WBDC
 
 #   Project name
-PROJECT=
+PROJECT=WBDC_Liana_Pop
 
 #   Target size for samples
-TARGET=
+TARGET=60000000
 
 #   Make the out directory
 mkdir -p ${OUT}
@@ -71,9 +71,9 @@ function read_depths() {
     cd "${ZIP_DIR}"
     #   Extract total number of sequences and sequence length
     TOTAL_SEQUENCE=`grep 'Total Sequences' fastqc_data.txt | cut -f 2`
-    SEQUENCE_LENGTH=`grep 'Sequence length' fastqc_data.txt | cut -f 2 | rev | cut -d '-' -f 1 | rev`
+    SEQUENCE_LENGTH=`grep 'Sequence length' fastqc_data.txt | cut -f 2`
     #   Do math and write to output file
-    echo -e "${SAMPLE_NAME} \t $[${TOTAL_SEQUENCE} * ${SEQUENCE_LENGTH} / ${TARG}]" >> "${OUTDIR}"/"${PROJ}"_read_depths.txt
+    echo -e "${SAMPLE_NAME} \t $[${TOTAL_SEQUENCE} / ${SEQUENCE_LENGTH} * ${TARG}]" >> "${OUTDIR}"/"${PROJ}"_read_depths.txt
     #   Get rid of unzipped FastQC report files
     cd "${ROOT}"
     rm -rf "${ZIP_DIR}"
